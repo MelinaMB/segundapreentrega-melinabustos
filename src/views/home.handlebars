@@ -1,0 +1,34 @@
+{{!-- lista de todos los productos agregados --}}
+<h1>Lista de productos, no real time</h1>
+<<<<<<< HEAD
+
+{{#each products}}
+<ul>
+    <li>title: {{title}}</li>
+    <li>description: {{description}}</li>
+    <li>code: {{code}} </li>
+    <li>price: {{price}} </li>
+    <li>status: {{status}} </li>
+    <li>stock: {{stock}} </li>
+    <li>category: {{category}} </li>
+    <li>thumbnails: {{thumbnails}} </li>
+    <li>id: {{id}} </li>
+</ul>
+{{/each}}
+=======
+<div class="container">
+    {{#each products}}
+    <ul class="border">
+        <li>title: {{title}}</li>
+        <li>description: {{description}}</li>
+        <li>code: {{code}} </li>
+        <li>price: {{price}} </li>
+        <li>status: {{status}} </li>
+        <li>stock: {{stock}} </li>
+        <li>category: {{category}} </li>
+        <li>Thumbnails:<a href="{{thumbnails}}">{{thumbnails}}</a></li>
+        <li>id: {{id}} </li>
+    </ul>
+    {{/each}}
+</div>
+>>>>>>> 8438707ec016f864b2932fba5d3dba0d866a11b0
