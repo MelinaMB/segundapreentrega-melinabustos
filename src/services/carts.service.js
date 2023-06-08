@@ -16,24 +16,28 @@ export class CartService {
   }
 
   async postProdInCart(_id) {
-    let cart = await CartsModel.findOne({ _id: _id });
-    if (cart) {
-      const products = await ProductModel.findOne({ _id: _id });
-      const encontrarProduct = products.find((producto) => producto.id == _id);
-      if (encontrarProduct) {
-        const prodCartExists = cart.products.find((prod) => prod.id == _id);
-        if (prodCartExists) {
-          prodCartExists.quantity++;
-        } else {
-          cart.products.push({
-            id: _id,
-            quantity: 1,
-          });
+    const carts = await this.getCart();
+        const cart = carts.find((cart) => cart.id === cartId);
+        if (cart) {
+            const products = await this.productManager.getProduct();
+            const encontrarProduct = products.find((producto) => producto.id == productId);
+            if (encontrarProduct) {
+                const prodCartExists = cart.products.find((prod) => prod.id == productId);
+                if (prodCartExists) {
+                    prodCartExists.quantity++;
+                } else {
+                    cart.products.push({
+                        id: productId, quantity: 1
+                    });
+                }
+                const cartsJson = JSON.stringify(carts);
+                await fs.promises.writeFile(this.path, cartsJson);
+                return cart.products;
+            } else {
+                throw new Error('product not found');
+            }
+
         }
-      }
-      let res = await CartsModel.updateOne({ _id: _id }, cart);
-      return res;
-    }
   }
 
   async getCartById(_id) {
@@ -41,11 +45,21 @@ export class CartService {
     return cart;
   }
 
-  async deleteAllProduct(){
-
+  async deleteAllProduct(_id){
+    let encontrarUnCarrito = await CartsModel.findOne({_id: _id});
+    if (encontrarUnCarrito){
+        
+    }
   }
 
   async deleteOneProductById(_id){
-
+    let encontrarUnCarrito = await CartsModel.findOne({_id: _id});
+    if (encontrarUnCarrito){
+        let encontrarUnProducto = await ProductModel.findOne({_id: _id});
+        if(encontrarUnProducto){
+            let deleteProduct = await CartsModel.deleteOne(encontrarUnProducto);
+            return deleteProduct;
+        }
+    }
   }
 }

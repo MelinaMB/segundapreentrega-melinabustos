@@ -15,9 +15,8 @@ export class ProductService {
 
     }
 
-    async getProductLimit() {
+    async getProductLimit(limit) {
         const products = await ProductModel.find({});
-        const limit = prodlimit
         if (limit) {
             const productoslimitados = products.slice(0, limit)
             return productoslimitados;
@@ -40,7 +39,7 @@ export class ProductService {
     async updateOne(_id, product){
         if (!_id) throw new Error('invalid_id');
         this.isValidProduct(product);
-        const prodUpdate = await ProductModel.updateOne({_id: id}, {product});
+        const prodUpdate = await ProductModel.updateOne({_id: _id}, product);
         return prodUpdate;
 
     }

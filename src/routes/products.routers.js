@@ -20,7 +20,7 @@ productsRouter.get("/", async (req, res) => {
         });
     }
 })
-
+// 
 productsRouter.get("/", async (req, res) => {
     try {
         const prodlimit = req.query.limit;
@@ -40,8 +40,8 @@ productsRouter.get("/", async (req, res) => {
 
 productsRouter.get("/:pid", async (req, res) => {
     try {
-        const {id} = req.params.pid;
-        const prodById = await Service.prodById({id});
+        const id = req.params.pid;
+        const prodById = await Service.prodById(id);
         return res.status(200).json({
             status: "success",
             msg: "producto por id obtenido",
@@ -76,9 +76,9 @@ productsRouter.post('/', async (req, res) => {
 
 productsRouter.put('/:pid', async (req, res) => {
     try {
-        const {id} = req.params.pid;
+        const id = req.params.pid;
         const upDate = req.body;
-        const prodUpdate = await Service.updateOne({id}, upDate)
+        const prodUpdate = await Service.updateOne(id, upDate)
         return res.status(201).json({
             status: "success",
             msg: "user uptaded",
