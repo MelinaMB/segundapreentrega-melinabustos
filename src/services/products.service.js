@@ -24,7 +24,6 @@ export class ProductService {
 
     async createOne(product){
        this.isValidProduct(product);
-
        const prodCreated = await ProductModel.create({product});
        return prodCreated;
         
@@ -33,7 +32,7 @@ export class ProductService {
     async updateOne(_id, product){
         if (!_id) throw new Error('invalid_id');
         this.isValidProduct(product);
-        const prodUpdate = await UserModel.updateOne({_id: id}, {product});
+        const prodUpdate = await ProductModel.updateOne({_id: id}, {product});
         return prodUpdate;
 
     }

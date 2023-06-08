@@ -1,15 +1,13 @@
 import express from "express";
-import CartManager from "../DAO/CartManager.js";
-
-const path = "../cart.json";
+import { CartService } from "../services/carts.service.js";
 
 export const cartsRouter = express.Router();
 
-const cartManager = new CartManager(path);
+const Service = new CartService();
 
 cartsRouter.post("/", async (req, res) => {
     try {
-        const cart = await cartManager.createCart();
+        const cart = await Service.createCart();
         res.status(201).json(cart);
     } catch (error) {
         res.status(400).json({ message: "cart not created" });
