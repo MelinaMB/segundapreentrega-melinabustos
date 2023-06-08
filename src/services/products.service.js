@@ -2,9 +2,17 @@ import { ProductModel } from "../DAO/models/products.model.js";
 
 export class ProductService {
     isValidProduct(product) {
-        return (typeof product.title !== 'undefined' && typeof product.description !== 'undefined'
-            && typeof product.price !== 'undefined' && typeof product.code !== 'undefined'
-            && typeof product.stock !== 'undefined' && typeof product.status !== 'undefined' && typeof product.category !== 'undefined');
+        if (typeof product.title === 'undefined' || typeof product.description === 'undefined'
+            || typeof product.price === 'undefined' || typeof product.code === 'undefined'
+            || typeof product.stock === 'undefined' || typeof product.status === 'undefined' || typeof product.category === 'undefined'){
+                throw new Error ('Product invalid')
+            } 
+    }
+
+    async getAll(){
+        const products = await ProductModel.find({});
+        return products
+
     }
 
     async getProductLimit() {

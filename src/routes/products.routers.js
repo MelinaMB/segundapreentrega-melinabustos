@@ -7,6 +7,22 @@ const Service = new ProductService();
 
 productsRouter.get("/", async (req, res) => {
     try {
+        const products = await Service.getAll();
+        return res.status(200).json({
+            status: "success",
+            msg: "listado de productos",
+            data: products,
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "error",
+            data: {},
+        });
+    }
+})
+
+productsRouter.get("/", async (req, res) => {
+    try {
         const prodlimit = req.query.limit;
         const prod = await Service.getProductLimit(prodlimit);
         return res.status(200).json({
