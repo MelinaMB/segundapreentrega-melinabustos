@@ -10,7 +10,7 @@ export class CartService {
   }
 
   async getAllCart() {
-    let carts = await CartsModel.find({});
+    let carts = await CartsModel.find({}).populate('products.product')
     console.log(JSON.stringify(carts, null, 4))
     return carts;
   }
@@ -37,7 +37,7 @@ export class CartService {
   }
 
   async getCartById(_id) {
-    let cart = await CartsModel.findOne({ _id: _id });
+    let cart = await CartsModel.findOne({ _id: _id }).populate('products.product')
     return cart;
   }
 

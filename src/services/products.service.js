@@ -32,7 +32,7 @@ export class ProductService {
 
     async createOne(product){
        this.isValidProduct(product);
-       const prodCreated = await ProductModel.create({product});
+       const prodCreated = await ProductModel.create(product);
        return prodCreated;
         
     }
@@ -48,9 +48,5 @@ export class ProductService {
     async deleteOne(_id){
         const deleted = await ProductModel.deleteOne({_id: _id});
         return deleted;
-    }
-
-    async createOne(){
-
     }
 }

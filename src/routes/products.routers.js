@@ -57,6 +57,7 @@ productsRouter.get("/:pid", async (req, res) => {
 
 productsRouter.post('/', async (req, res) => {
     try {
+        
         const product = req.body;
         const prodCreated = await Service.createOne(product);
         return res.status(201).json({

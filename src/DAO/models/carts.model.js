@@ -6,7 +6,7 @@ const schema = new Schema({
     products: {
       type: [
         {
-          course: {
+          product: {
             type: Schema.Types.ObjectId,
             ref: 'products',
           },

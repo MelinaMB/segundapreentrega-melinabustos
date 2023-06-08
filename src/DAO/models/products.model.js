@@ -21,7 +21,7 @@ const schema = new Schema({
   price: {
     type: Number,
     required: true,
-    max: 100,
+    
   },
   status: {
     type: String,
@@ -31,7 +31,7 @@ const schema = new Schema({
   stock: {
     type: Number,
     required: true,
-    max: 100,
+    
   },
   category: {
     type: String,
@@ -39,7 +39,7 @@ const schema = new Schema({
     max: 100,
   },
   thumbnails: {
-    type: String,
+    type: Array,
     required: true,
     max: 100,
   },
