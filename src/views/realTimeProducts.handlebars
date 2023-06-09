@@ -1,5 +1,4 @@
 {{!-- productos en real time --}}
-<<<<<<< HEAD
 <div>
     listo para trabajar con socket 
 </div>
@@ -18,69 +17,8 @@
     <li>id: {{id}} </li>
 </ul>
 {{/each}}
-=======
-<h1>Lista de productos real time</h1>
-<div id="productos" class="container">
-    {{#each products}}
-    <ul class="border">
-        <li>title: {{title}}</li>
-        <li>description: {{description}}</li>
-        <li>code: {{code}} </li>
-        <li>price: {{price}} </li>
-        <li>status: {{status}} </li>
-        <li>stock: {{stock}} </li>
-        <li>category: {{category}} </li>
-        <li>Thumbnails:<a href="{{thumbnails}}">{{thumbnails}}</a></li>  
-        <li>id: {{id}} </li>
-    </ul>
-    {{/each}}
-</div>
-<div class="d-flex flex-column align-items-center ">
-    <form id="formulario-productos"  name="products">
-        <div>Nuevo Producto</div>
-        <div>
-            <label for="title">title</label>
-            <input type="text" placeholder="title" id="title">
-        </div>
-        <div>
-            <label for="description">description</label>
-            <input type="text" placeholder="description" id="description">
-        </div>
-        <div>
-            <label for="code">code</label>
-            <input type="text" placeholder="code" id="code">
-        </div>
-        <div>
-            <label for="price">price</label>
-            <input type="text" placeholder="price" id="price">
-        </div>
-        <div>
-            <label for="status">status</label>
-            <input type="text" placeholder="status" id="status">
-        </div>
-        <div>
-            <label for="stock">stock</label>
-            <input type="text" placeholder="stock" id="stock">
-        </div>
-        <div>
-            <label for="category">category</label>
-            <input type="text" placeholder="category" id="category">
-        </div>
-        <div>
-            <label for="thumbnails">thumbnails</label>
-            <input type="text" placeholder="thumbnails" id="thumbnails">
-        </div>
-        <input type="submit" value="producto nuevo">
-    </form>
-
-</div>
->>>>>>> 8438707ec016f864b2932fba5d3dba0d866a11b0
 
 {{!-- instancia de socket del cliente --}}
 <script src="/socket.io/socket.io.js"></script>
 {{!-- script propio --}}
-<<<<<<< HEAD
 <script src="/js/index.js"></script>
-=======
-<script src="/js/index.js"></script>
->>>>>>> 8438707ec016f864b2932fba5d3dba0d866a11b0

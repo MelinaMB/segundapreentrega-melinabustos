@@ -64,3 +64,19 @@ cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 });
+
+cartsRouter.delete("/:cid", async (req, res) => {
+    try {
+        
+        const idcart = req.params.cid;
+        const cart = await Service.deleteProducts(idcart);
+        res.status(200).json({
+            status: "success",
+            masg: "producto eliminado",
+            data: cart, idcart,
+        });
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});

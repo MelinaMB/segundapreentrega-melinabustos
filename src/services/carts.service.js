@@ -16,25 +16,44 @@ export class CartService {
   }
 
   async postProdInCart(cartId, productId) {
-    let cart = await CartsModel.findOne({ _id: cartId});
-    cart.products.push({ product: productId });
-    let res = await CartsModel.updateOne({ _id: cartId }, cart)
+    let cart = await CartsModel.findOne({ _id: cartId });
+    if (cart) {
+      let products = await ProductModel.findOne({ _id: productId });
+      if (products) {
+        const prodCart = cart.products.find((prod) => prod.id == productId);
+        if (prodCart) {
+          prodCart.quantity++;
+        } else {
+          cart.products.push({ product: productId, quantity: 1 });
+        }
+      }
+    }
+
+    let res = await CartsModel.updateOne({ _id: cartId }, cart);
     return res;
   }
 
   async getCartById(_id) {
-    let cart = await CartsModel.findOne({ _id: _id })
+    let cart = await CartsModel.findOne({ _id: _id });
     console.log(JSON.stringify(cart, null, 4));
     return cart;
   }
 
+  async deleteOneProductById(cid, pid) {
+    let cart = await CartsModel.findOne({ _id: cid });
 
-  async deleteOneProductById(_id) {
-    let encontrarUnCarrito = await CartsModel.findOne({ _id: _id });
-    if (encontrarUnCarrito) {
-      let encontrarUnProducto = await ProductModel.findOneAndDelete({ _id: _id });
-        return encontrarUnProducto;
-      }
-    }
+    const productIndex = cart.products.findIndex((prod) => prod.product._id === pid);
+    if (productIndex === -1) throw new Error('product not found');
+    cart.products.splice(productIndex, 1);
+    // cart.carts.push(productIndex)
+    return cart;
   }
 
+  async deleteProducts (cid) {
+    const cart = await CartsModel.findOne({ _id: cid });
+    cart.products = [];
+    return cart;
+  }
+
+
+}

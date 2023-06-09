@@ -11,16 +11,20 @@ export class ProductService {
 
     async getAll(){
         const products = await ProductModel.find({});
-        return products
+        return products;
 
     }
 
-    async getProductLimit(limit) {
-        const products = await ProductModel.find({});
-        if (limit) {
-            const productoslimitados = products.slice(0, limit)
-            return productoslimitados;
-        } 
+    async getProductLimit(prodlimit, page, filtro, sort) {
+        const products = await ProductModel.paginate(
+            filtro ? { filtro: filtro } : {},
+            {limit: prodlimit, lean: true,
+            page: page,
+            sort: sort
+            }
+        );
+        return products;
+         
     }
 
     async prodById(_id){

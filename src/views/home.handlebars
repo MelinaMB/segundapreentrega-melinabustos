@@ -1,9 +1,8 @@
-{{!-- lista de todos los productos agregados --}}
+{{! lista de todos los productos agregados }}
 <h1>Lista de productos, no real time</h1>
-<<<<<<< HEAD
 
 {{#each products}}
-<ul>
+  <ul>
     <li>title: {{title}}</li>
     <li>description: {{description}}</li>
     <li>code: {{code}} </li>
@@ -13,22 +12,25 @@
     <li>category: {{category}} </li>
     <li>thumbnails: {{thumbnails}} </li>
     <li>id: {{id}} </li>
-</ul>
+  </ul>
 {{/each}}
-=======
-<div class="container">
-    {{#each products}}
-    <ul class="border">
-        <li>title: {{title}}</li>
-        <li>description: {{description}}</li>
-        <li>code: {{code}} </li>
-        <li>price: {{price}} </li>
-        <li>status: {{status}} </li>
-        <li>stock: {{stock}} </li>
-        <li>category: {{category}} </li>
-        <li>Thumbnails:<a href="{{thumbnails}}">{{thumbnails}}</a></li>
-        <li>id: {{id}} </li>
-    </ul>
-    {{/each}}
-</div>
->>>>>>> 8438707ec016f864b2932fba5d3dba0d866a11b0
+{{#if paginate.hasPrevPage}}
+  <a href="/products?page= {{paginate.prevPage}}">{{paginate.prevPage}}</a>
+{{/if}}
+<a> {{paginate.page}} </a>
+{{#if paginate.hasNextPage}}
+<a href="/products?page= {{paginate.nextPage}}">{{paginate.nextPage}}</a>
+{{/if}}
+</br>
+
+{ totalDocs:{{paginate.totalDocs}}
+limit:{{paginate.limit}}
+totalPages:{{paginate.totalPages}}
+page:
+{{paginate.page}}
+pagingCounter:{{paginate.pagingCounter}}
+hasPrevPage:{{paginate.hasPrevPage}}
+hasNextPage:{{paginate.hasNextPage}}
+prevPage:{{paginate.prevPage}}
+nextPage:{{paginate.nextPage}}
+}

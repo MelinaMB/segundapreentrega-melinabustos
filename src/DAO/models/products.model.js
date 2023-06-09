@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-// import monsoosePaginate from 'mongoose-paginate-v2';
+import monsoosePaginate from 'mongoose-paginate-v2';
 
 const schema = new Schema({
   title: {
@@ -44,5 +44,7 @@ const schema = new Schema({
     max: 100,
   },
 });
-// schema.plugin(monsoosePaginate);
+
+schema.plugin(monsoosePaginate);
+
 export const ProductModel = model('products', schema);
