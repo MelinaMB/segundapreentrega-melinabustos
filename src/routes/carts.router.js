@@ -40,7 +40,7 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
         const cart = await Service.postProdInCart(idcart, idproduct);
         res.status(200).json({
             status: "success",
-            masg: "producto actualizado",
+            masg: "producto agregado",
             data: cart, idcart,
         });
 

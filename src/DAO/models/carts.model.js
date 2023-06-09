@@ -9,11 +9,20 @@ const schema = new Schema({
           product: {
             type: Schema.Types.ObjectId,
             ref: 'products',
+            quantity:[],
           },
         },
       ],
       default: [],
     },
+});
+
+schema.pre('findOne', function () {
+  this.populate('products.product');
+});
+
+schema.pre('find', function () {
+  this.populate('products.product');
 });
 // schema.plugin(monsoosePaginate);
 export const CartsModel = model('carts', schema);
