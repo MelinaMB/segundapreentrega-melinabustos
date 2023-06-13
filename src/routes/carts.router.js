@@ -1,5 +1,6 @@
 import express from "express";
 import { CartService } from "../services/carts.service.js";
+import { Types } from "mongoose";
 
 export const cartsRouter = express.Router();
 
@@ -72,7 +73,7 @@ cartsRouter.delete("/:cid", async (req, res) => {
         const cart = await Service.deleteProducts(idcart);
         res.status(200).json({
             status: "success",
-            masg: "producto eliminado",
+            msg: "producto eliminado",
             data: cart, idcart,
         });
 
@@ -80,3 +81,34 @@ cartsRouter.delete("/:cid", async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 });
+
+cartsRouter.put('/:cid', (async (req, res) => {
+    try {
+        const idCart = req.params.cid;
+        const newCartContent = req.body;
+      const cartUpdate = await Service.updateCart(idCart, newCartContent);
+      res.status(200).json({
+        success: true,
+        msg: "cart update",
+        data: cartUpdate, idCart
+      });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+  }))
+
+  cartsRouter.put('/:cid/products/:pid', (async (req, res) => {
+    try {
+        const idCart = req.params.cid;
+        const idProd = req.params.pid;
+        const prodContent = req.body;
+      const cartUpdate = await Service.updateCartProdQuantity(idCart, idProd, prodContent.quantity);
+      res.status(200).json({
+        success: true,
+        msg: "cart update",
+        data: cartUpdate, idCart
+      });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+  }))

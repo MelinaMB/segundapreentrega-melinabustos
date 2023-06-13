@@ -17,8 +17,7 @@ export class ProductService {
 
     async getProductLimit(prodlimit, page, filtro, sort) {
         const products = await ProductModel.paginate(
-            filtro ? { filtro: filtro } : {},
-            {limit: prodlimit, lean: true,
+            {limit: prodlimit,
             page: page,
             sort: sort
             }

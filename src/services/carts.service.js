@@ -18,9 +18,9 @@ export class CartService {
   async postProdInCart(cartId, productId) {
     let cart = await CartsModel.findOne({ _id: cartId });
     if (cart) {
-      let products = await ProductModel.findOne({ _id: productId });
-      if (products) {
-        const prodCart = cart.products.find((prod) => prod.id == productId);
+      let product = await ProductModel.findOne({ _id: productId });
+      if (product) {
+        const prodCart = cart.products.find((prod) => prod.product.id == productId);
         if (prodCart) {
           prodCart.quantity++;
         } else {
@@ -41,19 +41,37 @@ export class CartService {
 
   async deleteOneProductById(cid, pid) {
     let cart = await CartsModel.findOne({ _id: cid });
-
-    const productIndex = cart.products.findIndex((prod) => prod.product._id === pid);
+    const productIndex = cart.products.findIndex((prod) => prod.product.id === pid);
     if (productIndex === -1) throw new Error('product not found');
     cart.products.splice(productIndex, 1);
-    // cart.carts.push(productIndex)
+    cart.save();
     return cart;
   }
 
-  async deleteProducts (cid) {
-    const cart = await CartsModel.findOne({ _id: cid });
-    cart.products = [];
+  async deleteProducts(cartId) {
+    const cart = await CartsModel.findOneAndUpdate({ _id: cartId }, {products: []});
     return cart;
   }
 
+  async updateCart(cartId, prodList) {
+      const catrUpdate = await CartsModel.findOneAndUpdate({ _id: cartId }, {products: prodList});
+      return catrUpdate;
+    
+  }
 
+  async updateCartProdQuantity(cartId, productId, quantity) {
+    let cart = await CartsModel.findOne({ _id: cartId });
+    if (cart) {
+      let product = await ProductModel.findOne({ _id: productId });
+      if (product) {
+        const prodCart = cart.products.find((prod) => prod.product.id == productId);
+        if (prodCart) {
+          prodCart.quantity = quantity;
+          let res = await CartsModel.updateOne({ _id: cartId }, cart);
+        }
+      }
+    }
+
+    return cart;
+  }
 }

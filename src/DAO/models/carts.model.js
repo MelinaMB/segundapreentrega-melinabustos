@@ -9,8 +9,8 @@ const schema = new Schema({
           product: {
             type: Schema.Types.ObjectId,
             ref: 'products',
-            
           },
+          quantity: Number,
         },
       ],
       default: [],

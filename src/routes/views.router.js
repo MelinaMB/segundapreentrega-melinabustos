@@ -8,12 +8,12 @@ const productManager = new ProductManager();
 export const viewsRouter = express.Router();
 
 viewsRouter.get('/', async (req, res) => { 
-    const {limit} = (req.query) || 10;
+    const {limit} = parseInt(req.query.limit, 10) || 10;
     const {sort} = req.query ? { price: req.query.sort } : '';
     const {filtro} = req.query || '';
     const {page} = req.query; 
     const {busqueda} = req.query.busquedad || '';
-    const allProducts = await ProductModel.paginate(filtro ? {[busqueda]: filtro} : {}, {limit: limit || 10, page: page,  sort: sort});
+    const allProducts = await ProductModel.paginate({}, {limit, page: page,  sort: sort});
     const {docs, ...rest} = allProducts;
     
     let products = docs.map((doc) => {
