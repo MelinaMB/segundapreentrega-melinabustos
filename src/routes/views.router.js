@@ -1,19 +1,30 @@
 import express from "express";
 import ProductManager from "../DAO/ProductManager.js";
 import { ProductModel } from "../DAO/models/products.model.js";
-import { CartsModel } from "../DAO/models/carts.model.js";
+
 
 const productManager = new ProductManager();
 
 export const viewsRouter = express.Router();
 
 viewsRouter.get('/', async (req, res) => { 
-    const {limit} = parseInt(req.query.limit, 10) || 10;
-    const {sort} = req.query ? { price: req.query.sort } : '';
-    const {filtro} = req.query || '';
-    const {page} = req.query; 
-    const {busqueda} = req.query.busquedad || '';
-    const allProducts = await ProductModel.paginate({}, {limit, page: page,  sort: sort});
+    const limit = parseInt(req.query.limit)  || 10;
+    const page = parseInt(req.query.page)  || 1; 
+    const sort = req.query ? { price: req.query.sort } : '';
+    let query = {};
+    if(req.query.category) {
+        query.category = req.query.category
+    }
+    if(req.query.title){
+        query.title = req.query.title
+    }
+    if(req.query.description){
+        query.description  = req.query.description
+    }
+    if(req.query.price){
+        query.price  = req.query.price
+    }
+    const allProducts = await ProductModel.paginate(query, { limit, page, sort});
     const {docs, ...rest} = allProducts;
     
     let products = docs.map((doc) => {
@@ -31,10 +42,7 @@ viewsRouter.get('/', async (req, res) => {
     return res.render("home", { products, paginate: rest, });  
 });
 
-viewsRouter.get('/', async (req, res) => {
-    const carts = await CartsModel.getAllCarts();
-    return res.render("carts",  carts )
-})
+
 
 viewsRouter.get('/', async (req, res) => {
     const products = await productManager.getProduct();

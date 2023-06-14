@@ -15,16 +15,6 @@ export class ProductService {
 
     }
 
-    async getProductLimit(prodlimit, page, filtro, sort) {
-        const products = await ProductModel.paginate(
-            {limit: prodlimit,
-            page: page,
-            sort: sort
-            }
-        );
-        return products;
-         
-    }
 
     async prodById(_id){
         const prod = await ProductModel.findOne( { _id: _id } );

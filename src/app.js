@@ -6,6 +6,7 @@ import { messagesRouter } from "./routes/messages.router.js";
 import { __dirname, connectMongo, connectSocket, connectSocketChat } from "./utils.js";
 import path from "path";
 import handlebars from "express-handlebars";
+import {cartViewRouter} from './routes/cartView.router.js'
 
 
 const app = express();
@@ -25,12 +26,13 @@ app.engine('handlebars', handlebars.engine());
 app.set("view engine", 'handlebars');
 app.set("views", path.join(__dirname, "views"));
 
+
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/realTimeProducts", viewsRouter);
 app.use("/products", viewsRouter);
 app.use("/test-chat", messagesRouter);
-app.use("/carts", viewsRouter )
+app.use("/carts", cartViewRouter )
 
 connectMongo();
 connectSocket(httpServer);

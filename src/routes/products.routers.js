@@ -81,7 +81,7 @@ productsRouter.put('/:pid', async (req, res) => {
     const id = req.params.pid;
     const upDate = req.body;
     const prodUpdate = await Service.updateOne(id, upDate);
-    return res.status(201).json({
+    return res.status(200).json({
       status: 'success',
       msg: 'user uptaded',
       data: prodUpdate,
@@ -96,7 +96,7 @@ productsRouter.delete('/:pid', async (req, res) => {
   try {
     const productId = req.params.pid;
     const proddeleted = await Service.deleteOne(productId);
-    return res.status(201).json({
+    return res.status(200).json({
       status: 'success',
       masg: 'producto borrado',
       data: proddeleted,

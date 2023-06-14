@@ -1,6 +1,6 @@
 import express from "express";
 import { CartService } from "../services/carts.service.js";
-import { Types } from "mongoose";
+
 
 export const cartsRouter = express.Router();
 
@@ -18,7 +18,7 @@ cartsRouter.post("/", async (req, res) => {
 cartsRouter.get("/", async (req, res) => {
     try {
         const carts = await Service.getAllCart();
-        res.status(201).json(carts);
+        res.status(200).json(carts);
     } catch (error) {
         res.status(404).json({ message: "cart not found" });
     }
@@ -28,7 +28,7 @@ cartsRouter.get("/:cid", async (req, res) => {
     try {
         const idcart = req.params.cid;
         const cart = await Service.getCartById(idcart);
-        res.status(201).json(cart);
+        res.status(200).json(cart);
     } catch (error) {
         res.status(404).json({ message: "cart not found" });
     }
