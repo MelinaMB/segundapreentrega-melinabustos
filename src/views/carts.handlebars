@@ -1,8 +1,25 @@
-<h1>Lista de carrito</h1>
+<h1>Carrito</h1>
 
-{{#each carts}}
-  <ul>
-    <li>id: {{id}} </li>
-    <li>product: {{id}} </li>
-  </ul>
-{{/each}}
+{{#if cart.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>title</th>
+        <th>price</th>
+        <th>quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each cart}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td>{{this.price}}</td>
+          <td>{{this.quantity}}</td>
+          {{! ? }}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No products in the cart</p>
+{{/if}}

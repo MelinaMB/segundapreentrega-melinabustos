@@ -1,18 +1,18 @@
-{{! lista de todos los productos agregados }}
-<h1>Lista de productos, no real time</h1>
 
+<h1>Lista de productos</h1>
 {{#each products}}
   <ul>
-    <li>title: {{title}}</li>
-    <li>description: {{description}}</li>
-    <li>code: {{code}} </li>
-    <li>price: {{price}} </li>
-    <li>status: {{status}} </li>
-    <li>stock: {{stock}} </li>
-    <li>category: {{category}} </li>
-    <li>thumbnails: {{thumbnails}} </li>
-    <li>id: {{id}} </li>
-    <button onclick="" >Agregar al carrito</button>
+    <li>title: {{this.title}}</li>
+    <li>description: {{this.description}}</li>
+    <li>code: {{this.code}} </li>
+    <li>price: {{this.price}} </li>
+    <li>status: {{this.status}} </li>
+    <li>stock: {{this.stock}} </li>
+    <li>category: {{this.category}} </li>
+    <li>thumbnails: {{this.thumbnails}} </li>
+    <a href="/products/{{this._id}}">Detalle</a>
+    <br>
+    <button onclick="putIntoCart('{{this._id}}')">Agregar al Carrito</button>
   </ul>
 {{/each}}
 {{#if paginate.hasPrevPage}}
@@ -24,7 +24,9 @@
 {{/if}}
 </br>
 
-{ totalDocs:{{paginate.totalDocs}}
+{ 
+status: "succes"
+totalDocs:{{paginate.totalDocs}}
 limit:{{paginate.limit}}
 totalPages:{{paginate.totalPages}}
 page:
@@ -35,3 +37,5 @@ hasNextPage:{{paginate.hasNextPage}}
 prevPage:{{paginate.prevPage}}
 nextPage:{{paginate.nextPage}}
 }
+
+<script src="/js/product.js"></script>

@@ -5,6 +5,7 @@ export class CartService {
   async createCart() {
     const created = CartsModel.create({
       products: [],
+      quantity: 1,
     });
     return created;
   }

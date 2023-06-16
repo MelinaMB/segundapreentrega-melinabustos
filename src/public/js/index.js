@@ -60,4 +60,6 @@ socket.on('new product', (productosTotal) => {
   productTodos.innerHTML = productVista;
 });
 
+// -------------------------------------------------------------------------------
+
 

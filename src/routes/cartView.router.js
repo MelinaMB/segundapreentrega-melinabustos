@@ -5,7 +5,7 @@ export const cartViewRouter = express.Router();
 
 const Service = new CartService()
 
-cartViewRouter.get('/:cid', async (req, res) => {
+cartViewRouter.get('/carts/:cid', async (req, res) => {
     const cid = req.query.cid
     const carts = await Service.getCartById(cid);
     const cartById = carts

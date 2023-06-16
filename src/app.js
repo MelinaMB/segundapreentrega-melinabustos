@@ -29,10 +29,9 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
-app.use("/realTimeProducts", viewsRouter);
-app.use("/products", viewsRouter);
+app.use("/", viewsRouter);
 app.use("/test-chat", messagesRouter);
-app.use("/carts", cartViewRouter )
+
 
 connectMongo();
 connectSocket(httpServer);
